@@ -275,9 +275,11 @@ export const profileImage = async (req, res) => {
 };
 
 export const testing = async (req, res) => {
-  return res.status(200).json({
-    status: 200,
-    message: "Testing berhasil",
-    data: null,
-  });
+  try {
+    const [rows] = await req.db.query("SELECT NOW() as time");
+    res.json({ status: 0, message: "DB Connected", server_time: rows[0].time });
+  } catch (err) {
+    console.error("DB Error:", err);
+    res.status(500).json({ status: 1, message: err.message });
+  }
 }
