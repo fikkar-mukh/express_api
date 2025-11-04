@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import path from "path";
-import { registration, login, profile, updateProfile, profileImage } from "./membership.controller.js";
+import { registration, login, profile, updateProfile, profileImage, testing } from "./membership.controller.js";
 import { authenticateToken } from "../../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -32,6 +32,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 
 // MEMBERSHIP ROUTES
+router.get("/test", testing);
 router.post("/registration", registration);
 router.post("/login", login);
 router.get("/profile", authenticateToken, profile);
