@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 // global req.db
 app.use((req, res, next) => {
+  console.log('=========>',db);
   req.db = db;
   next();
 });
